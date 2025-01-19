@@ -13,7 +13,7 @@ const menuItems = [
       {
         icon: "/teacher.png",
         label: "Noticias",
-        href: "/home",
+        href: "/coming-soon",
       },
     ],
   },
@@ -32,23 +32,23 @@ const menuItems = [
       },
       {
         icon: "/calendar.png",
-        label: "Calendario",
+        label: "Calendario estrenos",
         href: "/list/calendario-series",
+      },
+      {
+        icon: "/calendar.png",
+        label: "Calendario episodios",
+        href: "/list/calendario-episodios",
       },
       {
         icon: "/class.png",
         label: "Renovadas",
-        href: "/home",
+        href: "/coming-soon",
       },
       {
         icon: "/class.png",
         label: "Canceladas",
-        href: "/home",
-      },
-      {
-        icon: "/lesson.png",
-        label: "Anunciadas",
-        href: "/home",
+        href: "/coming-soon",
       },
     ],
   },
@@ -58,12 +58,12 @@ const menuItems = [
       {
         icon: "/exam.png",
         label: "En cartelera",
-        href: "/home",
+        href: "/coming-soon",
       },
       {
         icon: "/calendar.png",
         label: "Próximos estrenos",
-        href: "/home",
+        href: "/coming-soon",
       },
       {
         icon: "/calendar.png",
@@ -72,7 +72,7 @@ const menuItems = [
       },
     ],
   },
-  {
+  /*{
     title: "OTROS",
     items: [
       {
@@ -91,7 +91,7 @@ const menuItems = [
         href: "/home",
       },
     ],
-  },
+  },*/
 ];
 
 const Menu = () => {

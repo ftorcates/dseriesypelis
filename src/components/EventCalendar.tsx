@@ -63,10 +63,10 @@ const EventCalendar = () => {
         const formattedCards: FinalesType[] = data.results.map(
           (item: NotionApiResponse) => {
             const temp = item.properties.Temporada.rich_text[0].plain_text;
-            console.log(temp);
+            //console.log(temp);
 
             const temporada = "Temporada " + temp.slice(1);
-            console.log(temporada);
+            //console.log(temporada);
 
             return {
               id: item.id,

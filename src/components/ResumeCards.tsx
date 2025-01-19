@@ -53,7 +53,7 @@ const ResumeCards = () => {
     fetch("/api/notion")
       .then((response) => response.json())
       .then((data) => {
-        console.log("ResumeCards", data.results);
+        //console.log("ResumeCards", data.results);
         const formattedCards: CardType[] = data.results.map(
           (item: NotionApiResponse) => {
             return {
@@ -63,7 +63,6 @@ const ResumeCards = () => {
             };
           }
         );
-        console.log("1", formattedCards);
 
         setNotionCards(formattedCards);
       })

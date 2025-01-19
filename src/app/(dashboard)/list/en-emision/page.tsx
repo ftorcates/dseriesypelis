@@ -33,9 +33,9 @@ const SeriesEnEmision = () => {
       .then((response) => response.json())
       .then((data) => {
         const formattedEstrenos: SeriesEnEmisionType[] = data.data.results.map(
-          (item: NotionApiResponse) => (
-            console.log("serie en emision", item.properties),
-            {
+          (item: NotionApiResponse) =>
+            //console.log("serie en emision", item.properties),
+            ({
               id: item.id,
               cadenaPlataforma: item.properties.CadenaPlataforma.select.name,
               posterUrl: item.properties.Poster?.files[0]?.file?.url,
@@ -43,8 +43,7 @@ const SeriesEnEmision = () => {
               temporada: item.properties.Temporada.rich_text[0].plain_text,
               fechaInicio: item.properties.FechaInicio.date.start,
               fechaFin: item.properties.FechaFin?.date?.start,
-            }
-          )
+            })
         );
 
         setSeries(formattedEstrenos);
@@ -80,14 +79,21 @@ const SeriesEnEmision = () => {
                     {serie.cadenaPlataforma}
                   </p>
                 </div>
-
-                <Image
-                  src={serie.posterUrl}
-                  alt={serie.serie}
-                  width={240}
-                  height={360}
-                  className="w-full h-[360px] object-cover mb-4"
-                />
+                {serie.posterUrl ? (
+                  <Image
+                    src={serie.posterUrl}
+                    alt={serie.serie}
+                    width={240}
+                    height={360}
+                    priority
+                    className="w-full aspect-[2/3] object-cover mb-4"
+                  />
+                ) : (
+                  // Imagen por defecto o placeholder
+                  <div className="flex w-full aspect-[2/3] bg-gray-300 items-center justify-center">
+                    No image
+                  </div>
+                )}
                 <p className="mt-2 text-center font-semibold">
                   {serie.serie} - {serie.temporada}
                 </p>

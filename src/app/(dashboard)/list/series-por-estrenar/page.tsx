@@ -79,14 +79,21 @@ const SeriesPorEstrenar = () => {
                     {serie.cadenaPlataforma}
                   </p>
                 </div>
-
-                <Image
-                  src={serie.posterUrl}
-                  alt={serie.serie}
-                  width={240}
-                  height={360}
-                  className="w-full h-[360px] object-cover mb-4"
-                />
+                {serie.posterUrl ? (
+                  <Image
+                    src={serie.posterUrl}
+                    alt={serie.serie}
+                    width={240}
+                    height={360}
+                    priority
+                    className="w-full aspect-[2/3] object-cover mb-4"
+                  />
+                ) : (
+                  // Imagen por defecto o placeholder
+                  <div className="flex w-full aspect-[2/3] bg-gray-300 items-center justify-center">
+                    No image
+                  </div>
+                )}
                 <p className="mt-2 text-center font-semibold">
                   {serie.serie} - {serie.temporada}
                 </p>

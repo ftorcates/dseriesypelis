@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type SeriesPorEstrenarType = {
   id: string;
@@ -130,10 +131,19 @@ const CalendarioSeries = () => {
                       key={serie.id}
                       className={`text-xs p-1 mb-1 rounded text-white ${
                         platformColors[serie.cadenaPlataforma] || "bg-gray-500"
-                      }`}
+                      } flex items-center gap-2`}
                       title={`${serie.serie} - ${serie.temporada} (${serie.cadenaPlataforma})`}
                     >
-                      {serie.serie}
+                      {serie.posterUrl && (
+                        <Image
+                          src={serie.posterUrl}
+                          alt={serie.serie}
+                          width={20}
+                          height={30}
+                          className="w-5 h-7 rounded object-cover"
+                        />
+                      )}
+                      <span className="flex-1">{serie.serie}</span>
                     </div>
                   ))}
                 </div>

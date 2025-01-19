@@ -40,7 +40,7 @@ const EstrenosHoy = () => {
       .then((data) => {
         const formattedEstrenos: EstrenosType[] = data.results.map(
           (item: NotionApiResponse) => (
-            console.log("serie en emision", item.properties),
+            console.log("episodios hoy", item.properties),
             {
               id: item.id,
               cadenaPlataforma:
@@ -105,7 +105,8 @@ const EstrenosHoy = () => {
                     alt={estreno.serie + " - " + estreno.episodio}
                     width={240}
                     height={360}
-                    className="w-full h-[360px] object-cover rounded-lg"
+                    priority
+                    className="w-full aspect-[2/3] object-cover"
                   />
                   <p className="mt-2 text-center font-semibold">
                     {estreno.serie}

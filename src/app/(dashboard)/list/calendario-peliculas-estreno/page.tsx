@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type PeliculasType = {
   id: string;
@@ -139,14 +140,23 @@ const CalendarioPeliculas = () => {
                             ? "Cines"
                             : pelicula.streaming
                         ] || "bg-gray-500"
-                      }`}
+                      } flex items-center gap-2`}
                       title={`${pelicula.titulo} - ${
                         pelicula.tipoEstreno === "Cines"
                           ? "Cines"
                           : pelicula.streaming
                       }`}
                     >
-                      {pelicula.titulo}
+                      {pelicula.posterUrl && (
+                        <Image
+                          src={pelicula.posterUrl}
+                          alt={pelicula.titulo}
+                          width={20}
+                          height={30}
+                          className="w-5 h-7 rounded object-cover"
+                        />
+                      )}
+                      <span className="flex-1">{pelicula.titulo}</span>
                     </div>
                   ))}
                 </div>

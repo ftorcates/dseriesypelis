@@ -36,7 +36,7 @@ const PeliculasHoy = () => {
     fetch("/api/peliculasHoy")
       .then((response) => response.json())
       .then((data) => {
-        console.log("dataPeliculasHoy", data.results);
+        //console.log("dataPeliculasHoy", data.results);
         const formattedPeliculas: PeliculasHoyType[] = data.results.map(
           (item: NotionApiResponse) => ({
             id: item.id,
@@ -100,7 +100,8 @@ const PeliculasHoy = () => {
                     alt={pelicula.titulo}
                     width={240}
                     height={360}
-                    className="w-full h-[360px] object-cover rounded-lg"
+                    priority
+                    className="w-full aspect-[2/3] object-cover"
                   />
                   <p className="mt-2 text-center font-semibold">
                     {pelicula.titulo}
