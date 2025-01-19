@@ -32,6 +32,8 @@ const SeriesPorEstrenar = () => {
     fetch("/api/seriesPorEstrenar")
       .then((response) => response.json())
       .then((data) => {
+        console.log("EstrenosHoy", data.data);
+        console.log("EstrenosHoy", data.results);
         const formattedEstrenos: SeriesPorEstrenarType[] = data.results.map(
           (item: NotionApiResponse) => ({
             id: item.id,
@@ -88,14 +90,28 @@ const SeriesPorEstrenar = () => {
                 <p className="mt-2 text-center font-semibold">
                   {serie.serie} - {serie.temporada}
                 </p>
-                <p className="mt-2 text-center text-sm">
-                  <b>Inicio: </b>
-                  {serie.fechaInicio}
-                </p>
-                <p className="mt-2 text-center text-sm">
-                  <b>Fin: </b>
-                  {serie.fechaFin ?? "Por confirmar"}
-                </p>
+                {serie.fechaInicio === serie.fechaFin ? (
+                  <>
+                    <p className="mt-2 text-center text-sm">
+                      <b>Estreno: </b>
+                      {serie.fechaInicio}
+                    </p>
+                    <p className="mt-2 text-center text-sm">
+                      <i>Temporada completa</i>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="mt-2 text-center text-sm">
+                      <b>Inicio: </b>
+                      {serie.fechaInicio}
+                    </p>
+                    <p className="mt-2 text-center text-sm">
+                      <b>Fin: </b>
+                      {serie.fechaFin}
+                    </p>
+                  </>
+                )}
               </div>
             ))}
           </div>

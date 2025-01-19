@@ -32,7 +32,7 @@ const SeriesEnEmision = () => {
     fetch("/api/seriesEnEmision")
       .then((response) => response.json())
       .then((data) => {
-        const formattedEstrenos: SeriesEnEmisionType[] = data.results.map(
+        const formattedEstrenos: SeriesEnEmisionType[] = data.data.results.map(
           (item: NotionApiResponse) => (
             console.log("serie en emision", item.properties),
             {

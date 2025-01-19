@@ -1,7 +1,10 @@
 import { Client } from "@notionhq/client";
-import { NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
   const databaseId = "166bb7d905e24b41a0ce7d26feef35b7";
 

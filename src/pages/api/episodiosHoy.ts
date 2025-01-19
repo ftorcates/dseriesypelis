@@ -1,7 +1,10 @@
 import { Client } from "@notionhq/client";
-import type { NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handlerDestacados(res: NextApiResponse) {
+export default async function handlerEpisodiosHoy(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
   const databaseId = "95ba85336ec04705b6eb38ce86e9d022";
 
@@ -28,7 +31,7 @@ export default async function handlerDestacados(res: NextApiResponse) {
     });
     res.status(200).json(response);
   } catch (error) {
-    console.log("Errrroooorrrrr");
+    console.log("Errrroooorrrrr 1234");
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error";
     res

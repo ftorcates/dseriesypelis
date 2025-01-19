@@ -50,7 +50,7 @@ const Destacados = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("destacados ", data);
-        const formattedCards: ResumenType[] = data.results.map(
+        const formattedCards: ResumenType[] = data.data.results.map(
           (item: NotionApiResponse) => {
             console.log(data);
 

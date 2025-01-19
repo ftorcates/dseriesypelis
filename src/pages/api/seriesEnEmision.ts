@@ -1,26 +1,28 @@
 import { Client } from "@notionhq/client";
-import { NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handlerDestacados(res: NextApiResponse) {
-  const notion = new Client({ auth: process.env.NOTION_TOKEN });
-  const databaseId = "64143e7030654d14ab5c213a78ec0634";
-
+export default async function handlerSeriesEnEmision(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
-    const hoy = new Date().toISOString().split("T")[0];
+    const notion = new Client({ auth: process.env.NOTION_TOKEN });
+    const databaseId = "64143e7030654d14ab5c213a78ec0634";
+
     const response = await notion.databases.query({
       database_id: databaseId,
       filter: {
         property: "EstadoEmision",
         formula: {
           string: {
-            equals: "En emisión", // o contains, starts_with, ends_with
+            equals: "En emisión",
           },
         },
       },
       sorts: [
         {
           property: "FechaInicio",
-          direction: "ascending", // o "descending" para orden descendente
+          direction: "ascending",
         },
         {
           property: "Título",
@@ -28,13 +30,15 @@ export default async function handlerDestacados(res: NextApiResponse) {
         },
       ],
     });
-    res.status(200).json(response);
+
+    console.log("responseSeriesEnEmision", response);
+
+    return res.status(200).json({ data: response });
   } catch (error) {
-    console.log("Errrroooorrrrr");
-    const errorMessage =
-      error instanceof Error ? error.message : "Unknown error";
-    res
-      .status(500)
-      .json({ message: "Error querying Notion API", error: errorMessage });
+    console.error(error);
+    return res.status(500).json({
+      message: "Error querying Notion API",
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
   }
 }

@@ -35,7 +35,7 @@ const EstrenosHoy = () => {
   const [estrenos, setEstrenos] = useState<EstrenosType[]>([]);
 
   useEffect(() => {
-    fetch("/api/seriesEnEmision")
+    fetch("/api/episodiosHoy")
       .then((response) => response.json())
       .then((data) => {
         const formattedEstrenos: EstrenosType[] = data.results.map(
