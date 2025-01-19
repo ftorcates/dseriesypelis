@@ -77,7 +77,6 @@ const EventCalendar = () => {
             };
           }
         );
-        console.log("1", formattedCards);
 
         setFinalesTemporadas(formattedCards);
       })
@@ -104,9 +103,7 @@ const EventCalendar = () => {
             </div>
             <div className="flex items-center justify-between">
               <p className="mt-2 text-gray-500 text-sm">{final.fechaFin}</p>
-              <p className="mt-2 text-gray-300 text-sm">
-                Temporada {final.temporada}
-              </p>
+              <p className="mt-2 text-gray-300 text-sm">{final.temporada}</p>
             </div>
           </div>
         ))}

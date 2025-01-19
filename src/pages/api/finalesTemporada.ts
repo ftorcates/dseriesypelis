@@ -9,6 +9,7 @@ export default async function handlerFinalesTemporada(
   const databaseId = "64143e7030654d14ab5c213a78ec0634";
 
   try {
+    const hoy = new Date().toISOString().split("T")[0];
     const response = await notion.databases.query({
       database_id: databaseId,
       filter: {
@@ -16,7 +17,7 @@ export default async function handlerFinalesTemporada(
           {
             property: "FechaFin",
             date: {
-              on_or_after: "2024-09-09",
+              on_or_after: hoy,
             },
           },
           {
@@ -33,7 +34,7 @@ export default async function handlerFinalesTemporada(
           direction: "ascending",
         },
       ],
-      page_size: 3,
+      page_size: 5,
     });
     res.status(200).json(response);
   } catch (error) {
