@@ -31,6 +31,11 @@ const menuItems = [
         href: "/list/series-por-estrenar",
       },
       {
+        icon: "/calendar.png",
+        label: "Calendario",
+        href: "/list/calendario-series",
+      },
+      {
         icon: "/class.png",
         label: "Renovadas",
         href: "/home",
@@ -61,9 +66,9 @@ const menuItems = [
         href: "/home",
       },
       {
-        icon: "/class.png",
-        label: "Anunciadas",
-        href: "/home",
+        icon: "/calendar.png",
+        label: "Calendario de estrenos",
+        href: "/list/calendario-peliculas-estreno",
       },
     ],
   },
