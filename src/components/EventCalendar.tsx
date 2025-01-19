@@ -13,24 +13,24 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const events = [
   {
     id: 1,
-    title: "Sunny",
-    time: "Apple TV+",
-    description: "Temporada 1",
-    date: "04/09/2024",
+    title: "The Sex Lives of College Girls",
+    time: "MAX",
+    description: "Temporada 2",
+    date: "23/01/2025",
   },
   {
     id: 2,
-    title: "The Ark",
-    time: "SyFy",
-    description: "Temporada 2",
-    date: "04/09/2024",
+    title: "The Agency",
+    time: "Paramount+",
+    description: "Temporada 1",
+    date: "24/01/2025",
   },
   {
     id: 3,
-    title: "Code Geass: Rozé of the Recapture",
-    time: "Disney+",
+    title: "Okura: Cold Case Investigation",
+    time: "Netflix",
     description: "Temporada 1",
-    date: "06/09/2024",
+    date: "25/01/2025",
   },
 ];
 
