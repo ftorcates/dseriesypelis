@@ -1,4 +1,3 @@
-/* trunk-ignore-all(prettier) */
 import { Client } from "@notionhq/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
