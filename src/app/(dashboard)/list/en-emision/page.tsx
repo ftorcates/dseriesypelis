@@ -32,18 +32,17 @@ const SeriesEnEmision = () => {
     fetch("/api/seriesEnEmision")
       .then((response) => response.json())
       .then((data) => {
+        console.log("Series en emision", data.data.results);
         const formattedEstrenos: SeriesEnEmisionType[] = data.data.results.map(
-          (item: NotionApiResponse) =>
-            //console.log("serie en emision", item.properties),
-            ({
-              id: item.id,
-              cadenaPlataforma: item.properties.CadenaPlataforma.select.name,
-              posterUrl: item.properties.Poster?.files[0]?.file?.url,
-              serie: item.properties.Título.title[0].plain_text,
-              temporada: item.properties.Temporada.rich_text[0].plain_text,
-              fechaInicio: item.properties.FechaInicio.date.start,
-              fechaFin: item.properties.FechaFin?.date?.start,
-            })
+          (item: NotionApiResponse) => ({
+            id: item.id,
+            cadenaPlataforma: item.properties.CadenaPlataforma.select.name,
+            posterUrl: item.properties.Poster?.files[0]?.file?.url,
+            serie: item.properties.Título.title[0].plain_text,
+            temporada: item.properties.Temporada.rich_text[0].plain_text,
+            fechaInicio: item.properties.FechaInicio.date.start,
+            fechaFin: item.properties.FechaFin?.date?.start,
+          })
         );
 
         setSeries(formattedEstrenos);

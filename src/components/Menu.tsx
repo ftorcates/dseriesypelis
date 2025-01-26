@@ -63,12 +63,17 @@ const menuItems = [
       {
         icon: "/calendar.png",
         label: "Próximos estrenos",
-        href: "/coming-soon",
+        href: "/list/peliculas-por-estrenar",
       },
       {
         icon: "/calendar.png",
         label: "Calendario de estrenos",
         href: "/list/calendario-peliculas-estreno",
+      },
+      {
+        icon: "/calendar.png",
+        label: "Calendario de adiciones",
+        href: "/list/calendario-peliculas-adicion",
       },
     ],
   },

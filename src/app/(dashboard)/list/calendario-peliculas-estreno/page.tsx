@@ -53,7 +53,7 @@ const CalendarioPeliculas = () => {
     fetch("/api/calendarioPeliculasEstreno")
       .then((response) => response.json())
       .then((data) => {
-        console.log("data", data);
+        console.log("Calendario peliculas estreno	", data.results);
         const formattedPeliculas: PeliculasType[] = data.results.map(
           (item: NotionApiResponse) => ({
             id: item.id,
@@ -153,7 +153,7 @@ const CalendarioPeliculas = () => {
                           alt={pelicula.titulo}
                           width={20}
                           height={30}
-                          className="w-5 h-7 rounded object-cover"
+                          className="rounded object-cover"
                         />
                       )}
                       <span className="flex-1">{pelicula.titulo}</span>

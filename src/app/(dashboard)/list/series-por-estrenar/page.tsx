@@ -32,8 +32,7 @@ const SeriesPorEstrenar = () => {
     fetch("/api/seriesPorEstrenar")
       .then((response) => response.json())
       .then((data) => {
-        console.log("EstrenosHoy", data.data);
-        console.log("EstrenosHoy", data.results);
+        console.log("Series por estrenar", data.results);
         const formattedEstrenos: SeriesPorEstrenarType[] = data.results.map(
           (item: NotionApiResponse) => ({
             id: item.id,

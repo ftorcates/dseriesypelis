@@ -52,11 +52,10 @@ const CalendarioEpisodios = () => {
     setIsLoading(true);
     fetch("/api/calendarioEpisodios")
       .then((response) => {
-        console.log("Respuesta recibida:", response.status);
         return response.json();
       })
       .then((data) => {
-        console.log("Datos recibidos:", data);
+        console.log("Calendario episodios", data.results);
         setSeries(
           data.results.map((item: any) => ({
             id: item.id,

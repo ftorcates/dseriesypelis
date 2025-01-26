@@ -3,39 +3,42 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-type SeriesPorEstrenarType = {
+type PeliculasType = {
   id: string;
-  cadenaPlataforma: string;
+  streaming: string;
+  tipoEstreno: string;
   posterUrl: string;
-  serie: string;
-  temporada: string;
-  fechaInicio: string;
-  fechaFin: string;
+  titulo: string;
+  etiqueta: string;
+  fechaEstreno: string;
 };
 
-const CalendarioSeries = () => {
-  const [series, setSeries] = useState<SeriesPorEstrenarType[]>([]);
+type NotionApiResponse = {
+  id: string;
+  properties: {
+    TipoEstreno: { select: { name: string } };
+    Streaming?: { select: { name: string } };
+    Poster: { files: Array<{ file: { url: string } }> };
+    Titulo: { title: Array<{ plain_text: string }> };
+    Etiquetas: { multi_select: Array<{ name: string }> };
+    Estreno: { date: { start: string } };
+  };
+};
+
+const CalendarioPeliculasAdicion = () => {
+  const [peliculas, setPeliculas] = useState<PeliculasType[]>([]);
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Colores por plataforma
+  // Colores por plataforma/tipo
   const platformColors: { [key: string]: string } = {
-    ABC: "bg-gray-600",
-    AMC: "bg-cyan-500",
-    "Apple TV+": "bg-gray-700",
-    CBS: "bg-gray-900",
-    "Disney+": "bg-indigo-500",
-    FOX: "bg-blue-700",
-    Hulu: "bg-green-400",
-    MAX: "bg-blue-600",
-    "MGM+": "bg-amber-500",
-    "Movistar+": "bg-blue-300",
-    NBC: "bg-purple-600",
     Netflix: "bg-red-500",
-    "Paramount+": "bg-blue-500",
-    Peacock: "bg-green-600",
     "Prime Video": "bg-blue-500",
-    "The CW": "bg-orange-500",
-    // Añade más plataformas según necesites
+    "Disney+": "bg-indigo-500",
+    MAX: "bg-blue-700",
+    "Apple TV+": "bg-gray-700",
+    Cines: "bg-gray-900",
+    "Paramount+": "bg-blue-600",
+    // Añade más según necesites
   };
 
   const changeMonth = (offset: number) => {
@@ -47,21 +50,22 @@ const CalendarioSeries = () => {
   };
 
   useEffect(() => {
-    fetch("/api/calendarioSeries")
+    fetch("/api/calendarioPeliculasAdicion")
       .then((response) => response.json())
       .then((data) => {
-        console.log("Calendario series", data.results);
-        setSeries(
-          data.results.map((item: any) => ({
+        console.log("Calendario peliculas adicion ", data.results);
+        const formattedPeliculas: PeliculasType[] = data.results.map(
+          (item: NotionApiResponse) => ({
             id: item.id,
-            cadenaPlataforma: item.properties.CadenaPlataforma.select.name,
-            posterUrl: item.properties.Poster?.files[0]?.file?.url,
-            serie: item.properties.Título.title[0].plain_text,
-            temporada: item.properties.Temporada.rich_text[0].plain_text,
-            fechaInicio: item.properties.FechaInicio.date.start,
-            fechaFin: item.properties.FechaFin?.date?.start,
-          }))
+            tipoEstreno: item.properties.TipoEstreno.select.name,
+            streaming: item.properties.Streaming?.select?.name || "",
+            posterUrl: item.properties.Poster?.files[0]?.file?.url || "",
+            titulo: item.properties.Titulo.title[0].plain_text,
+            etiqueta: item.properties.Etiquetas.multi_select[0].name,
+            fechaEstreno: item.properties.Estreno.date.start,
+          })
         );
+        setPeliculas(formattedPeliculas);
       })
       .catch((error) => console.error("Error:", error));
   }, []);
@@ -82,10 +86,10 @@ const CalendarioSeries = () => {
     return days;
   };
 
-  const getSeriesForDate = (date: Date) => {
+  const getPeliculasForDate = (date: Date) => {
     if (!date) return [];
     const dateString = date.toISOString().split("T")[0];
-    return series.filter((serie) => serie.fechaInicio === dateString);
+    return peliculas.filter((pelicula) => pelicula.fechaEstreno === dateString);
   };
 
   const days = getDaysInMonth(currentDate);
@@ -127,24 +131,32 @@ const CalendarioSeries = () => {
               <>
                 <div className="text-right text-gray-500">{date.getDate()}</div>
                 <div className="mt-1">
-                  {getSeriesForDate(date).map((serie) => (
+                  {getPeliculasForDate(date).map((pelicula) => (
                     <div
-                      key={serie.id}
+                      key={pelicula.id}
                       className={`text-xs p-1 mb-1 rounded text-white ${
-                        platformColors[serie.cadenaPlataforma] || "bg-gray-500"
+                        platformColors[
+                          pelicula.tipoEstreno === "Cines"
+                            ? "Cines"
+                            : pelicula.streaming
+                        ] || "bg-gray-500"
                       } flex items-center gap-2`}
-                      title={`${serie.serie} - ${serie.temporada} (${serie.cadenaPlataforma})`}
+                      title={`${pelicula.titulo} - ${
+                        pelicula.tipoEstreno === "Cines"
+                          ? "Cines"
+                          : pelicula.streaming
+                      }`}
                     >
-                      {serie.posterUrl && (
+                      {pelicula.posterUrl && (
                         <Image
-                          src={serie.posterUrl}
-                          alt={serie.serie}
+                          src={pelicula.posterUrl}
+                          alt={pelicula.titulo}
                           width={20}
                           height={30}
                           className="rounded object-cover"
                         />
                       )}
-                      <span className="flex-1">{serie.serie}</span>
+                      <span className="flex-1">{pelicula.titulo}</span>
                     </div>
                   ))}
                 </div>
@@ -167,4 +179,4 @@ const CalendarioSeries = () => {
   );
 };
 
-export default CalendarioSeries;
+export default CalendarioPeliculasAdicion;

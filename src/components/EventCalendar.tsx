@@ -60,6 +60,7 @@ const EventCalendar = () => {
     fetch("/api/finalesTemporada")
       .then((response) => response.json())
       .then((data) => {
+        console.log("Proximos finales de temporada", data.results);
         const formattedCards: FinalesType[] = data.results.map(
           (item: NotionApiResponse) => {
             const temp = item.properties.Temporada.rich_text[0].plain_text;

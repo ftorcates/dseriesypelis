@@ -36,7 +36,7 @@ const PeliculasHoy = () => {
     fetch("/api/peliculasHoy")
       .then((response) => response.json())
       .then((data) => {
-        //console.log("dataPeliculasHoy", data.results);
+        console.log("Peliculas hoy", data.results);
         const formattedPeliculas: PeliculasHoyType[] = data.results.map(
           (item: NotionApiResponse) => ({
             id: item.id,

@@ -38,20 +38,18 @@ const EstrenosHoy = () => {
     fetch("/api/episodiosHoy")
       .then((response) => response.json())
       .then((data) => {
+        console.log("Episodios hoy", data.results);
         const formattedEstrenos: EstrenosType[] = data.results.map(
-          (item: NotionApiResponse) => (
-            console.log("episodios hoy", item.properties),
-            {
-              id: item.id,
-              cadenaPlataforma:
-                item.properties.CadenaPlataforma.multi_select[0].name,
-              episodio: item.properties.Episodio.rich_text[0].plain_text,
-              posterUrl: item.properties.Poster.files[0].file.url,
-              serie: item.properties.Serie.title[0].plain_text,
-              temporada: item.properties.Temporada.rich_text[0].plain_text,
-              tags: item.properties.Tags?.multi_select[0]?.name,
-            }
-          )
+          (item: NotionApiResponse) => ({
+            id: item.id,
+            cadenaPlataforma:
+              item.properties.CadenaPlataforma.multi_select[0].name,
+            episodio: item.properties.Episodio.rich_text[0].plain_text,
+            posterUrl: item.properties.Poster.files[0].file.url,
+            serie: item.properties.Serie.title[0].plain_text,
+            temporada: item.properties.Temporada.rich_text[0].plain_text,
+            tags: item.properties.Tags?.multi_select[0]?.name,
+          })
         );
 
         setEstrenos(formattedEstrenos);
