@@ -23,6 +23,16 @@ export default async function handlerPeliculasPorEstrenar(
           },
         ],
       },
+      sorts: [
+        {
+          property: "Estreno",
+          direction: "ascending", // o "descending" para orden descendente
+        },
+        {
+          property: "Titulo",
+          direction: "ascending",
+        },
+      ],
     });
     res.status(200).json(response);
   } catch (error) {
