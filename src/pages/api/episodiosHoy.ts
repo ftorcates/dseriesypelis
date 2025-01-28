@@ -28,6 +28,12 @@ export default async function handlerEpisodiosHoy(
           },
         ],
       },
+      sorts: [
+        {
+          property: "Serie",
+          direction: "ascending",
+        },
+      ],
     });
     res.status(200).json(response);
   } catch (error) {
