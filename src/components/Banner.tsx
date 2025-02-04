@@ -5,8 +5,8 @@ export default function Banner() {
   return (
     <div className="relative w-full h-[350px] rounded-lg overflow-hidden">
       <Image
-        src="/banners/YourFriendlyNeighborhoodSpiderMan.jpg"
-        alt="Prime Target - Apple TV+"
+        src="/banners/SchoolSpirits2.jpg"
+        alt="School Spirits - Paramount+"
         fill
         className="object-cover"
         priority
